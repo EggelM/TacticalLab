@@ -11,6 +11,9 @@ __pycache__/
 # Logs
 *.log
 
+# Distribución / empaquetado
+*.egg-info/
+
 # Jupyter
 .ipynb_checkpoints/
 
