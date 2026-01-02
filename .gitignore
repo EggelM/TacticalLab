@@ -1,9 +1,12 @@
 # Entorno virtual
 venv/
+.venv/
 
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 # Variables de entorno
 .env
@@ -13,6 +16,8 @@ __pycache__/
 
 # Distribución / empaquetado
 *.egg-info/
+dist/
+build/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -23,3 +28,13 @@ __pycache__/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# -------------------
+# TacticalLab específico
+# -------------------
+
+# Datos crudos (scraping)
+data/raw/
+
+# Playwright
+.playwright/
