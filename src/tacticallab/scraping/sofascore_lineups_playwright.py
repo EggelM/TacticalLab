@@ -1,11 +1,17 @@
 from playwright.sync_api import sync_playwright
 import json
-import os
+from pathlib import Path
+
+# 📌 Raíz del proyecto (TacticalLab/)
+BASE_DIR = Path(__file__).resolve().parents[3]
+
+DATA_RAW_LINEUPS = BASE_DIR / "data" / "raw" / "lineups"
 
 
 def fetch_lineups(event_id: int):
     url = f"https://api.sofascore.com/api/v1/event/{event_id}/lineups"
-    os.makedirs("data/raw/lineups", exist_ok=True)
+
+    DATA_RAW_LINEUPS.mkdir(parents=True, exist_ok=True)
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -27,11 +33,11 @@ def fetch_lineups(event_id: int):
         data = response.json()
         browser.close()
 
-    path = f"data/raw/lineups/{event_id}.json"
-    with open(path, "w", encoding="utf-8") as f:
+    output_path = DATA_RAW_LINEUPS / f"{event_id}.json"
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
-    print(f"✅ Lineups guardados en {path}")
+    print(f"✅ Lineups guardados en {output_path}")
 
 
 if __name__ == "__main__":
